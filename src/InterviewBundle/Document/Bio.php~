@@ -1,0 +1,84 @@
+<?php
+
+namespace InterviewBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+
+/**
+ * Description of Bio
+ *
+ * @author mubasharkk
+ * 
+ * @MongoDB\Document
+ */
+class Bio
+{
+    /**
+     * @MongoDB\Id
+     */
+    protected $id;
+
+    /**
+     * @MongoDB\Field(type="hash")
+     */
+    protected $name;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $title;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $birth;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $death;
+
+    /**
+     * @MongoDB\Field(type="collection")
+     */
+    protected $contrib;
+
+    /**
+     * @MongoDB\Field(type="collection")
+     */
+    protected $awards;
+    
+
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param hash $name
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return hash $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+}
