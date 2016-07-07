@@ -10,7 +10,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  *
  * @author mubasharkk
  * 
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="InterviewBundle\Repository\BioRepository")
+ *  
  */
 class Bio
 {

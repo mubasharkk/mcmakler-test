@@ -30,10 +30,11 @@ class DefaultController extends Controller
 	  
 	  $my_bio = $this->get('doctrine_mongodb')
         ->getRepository('InterviewBundle:Bio')
-        ->find("51df07b094c6acd67e492f41");
+			  ;
+//        ->find("51df07b094c6acd67e492f41");
 	  
 
-	  return new Response('My Bio: '.$my_bio->getFullname());
+	  return new Response('My Bio: '.$my_bio->findTotalMatches());
 	
     }
 }
