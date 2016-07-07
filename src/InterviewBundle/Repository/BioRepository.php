@@ -27,6 +27,12 @@ class BioRepository extends DocumentRepository {
    */  
   public function findByContribution($contributionName) {
 	
+	return $this->createQueryBuilder()
+			->field('name.first')->equals($firstName)
+            ->sort('name', 'ASC')
+            ->getQuery()
+            ->execute();	
+	
   }
 
   /**
@@ -36,6 +42,13 @@ class BioRepository extends DocumentRepository {
    */  
   public function findByDeadBefore($year) {
 	
+	$dt = new \DateTime($year);
+
+	return $this->createQueryBuilder()
+			->field('death')->lte($dt)
+            ->sort('death', 'DESC')
+            ->getQuery()
+            ->execute();	
   }
 
 }
