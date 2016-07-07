@@ -1,6 +1,6 @@
 <?php
 
-namespace Test;
+namespace InterviewBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
