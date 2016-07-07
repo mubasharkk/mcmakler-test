@@ -43,7 +43,7 @@ class Bio
     /**
      * @MongoDB\Field(type="collection")
      */
-    protected $contrib;
+    protected $contribs;
 
     /**
      * @MongoDB\Field(type="collection")
@@ -150,14 +150,14 @@ class Bio
     }
 
     /**
-     * Set contrib
+     * Set contribs
      *
-     * @param collection $contrib
+     * @param collection $contribs
      * @return self
      */
-    public function setContrib($contrib)
+    public function setContribs($contribs)
     {
-        $this->contrib = $contrib;
+        $this->contribs = $contribs;
         return $this;
     }
 
@@ -166,9 +166,9 @@ class Bio
      *
      * @return collection $contrib
      */
-    public function getContrib()
+    public function getContribs()
     {
-        return $this->contrib;
+        return $this->contribs;
     }
 
     /**

@@ -27,11 +27,16 @@ class BioRepository extends DocumentRepository {
    */  
   public function findByContribution($contributionName) {
 	
-	return $this->createQueryBuilder()
-			->field('name.first')->equals($firstName)
-            ->sort('name', 'ASC')
-            ->getQuery()
-            ->execute();	
+	$qb = $this->createQueryBuilder();
+	
+	if(is_null($contributionName)){
+	  $qb->field('contribs')->exists(false);	  
+	}else {
+	  $qb
+		->field('contribs')->all(array($contributionName))
+		->field('contribs')->exists(true);	  
+	}
+	return $qb->getQuery()->execute();	
 	
   }
 

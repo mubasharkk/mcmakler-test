@@ -34,7 +34,8 @@ class DefaultController extends Controller {
 	;
 
 //	$bios = $bioRepo->findByFirstName('John');
-	$bios = $bioRepo->findByDeadBefore(1999);
+//	$bios = $bioRepo->findByDeadBefore(1999);
+	$bios = $bioRepo->findByContribution('Ruby');
 //        ->find("51df07b094c6acd67e492f41");
 
 	$encoders = array(new JsonEncoder());
