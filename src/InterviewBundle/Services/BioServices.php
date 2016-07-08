@@ -27,5 +27,20 @@ class BioServices {
 	
 	return $awards	;
   }
+  
+  public function getAllContributions() {
+
+	$contributions = array();
+	
+	$results = $this->bioRepo->findByContribution(NULL);
+	
+	foreach($results as $res){
+	  foreach($res->getContribs() as $contrib){
+		$contributions[] = $contrib;
+	  }
+	}
+	
+	return $contributions;
+  }
 
 }

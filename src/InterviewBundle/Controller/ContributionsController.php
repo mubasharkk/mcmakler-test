@@ -21,5 +21,14 @@ class ContributionsController extends Controller {
   
   function indexAction(){
 	
+	$bioRepo = $this->get('interview_bundle.bios_service');
+	$contribs = $bioRepo->getAllContributions();
+	
+	$json = json_encode($contribs, JSON_PRETTY_PRINT);
+	$response = new Response($json);
+	$response->headers->set('Content-Type', 'application/json');
+
+	return $response;
+	
   }
 }

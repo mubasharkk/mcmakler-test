@@ -30,12 +30,11 @@ class BioRepository extends DocumentRepository {
 	$qb = $this->createQueryBuilder();
 
 	if (is_null($contributionName)) {
-	  $qb->field('contribs')->exists(false);
+	  $qb->field('contribs')->exists(true);
 	} else {
-	  $qb
-			  ->field('contribs')->all(array($contributionName))
-			  ->field('contribs')->exists(true);
+	  $qb->field('contribs')->all(array($contributionName))->field('contribs')->exists(true);
 	}
+	
 	return $qb->getQuery()->execute();
   }
 
