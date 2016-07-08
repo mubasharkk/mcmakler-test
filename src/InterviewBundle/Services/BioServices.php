@@ -42,5 +42,11 @@ class BioServices {
 	
 	return $contributions;
   }
+  
+  function findContributions($contributionName){
+	
+	return $this->bioRepo->findByContribution($contributionName);
+	
+  }
 
 }
