@@ -7,3 +7,14 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    interview_bundle.bios_repo:
+        class: InterviewBundle\Repository\BioRepository
+        factory: ["@doctrine_mongodb", getRepository]
+        arguments: [InterviewBundle:Bio]
+
+    interview_bundle.bios_service:
+        class: InterviewBundle\Services\BioServices
+        arguments: ['@interview_bundle.bios_repo']
+
+        

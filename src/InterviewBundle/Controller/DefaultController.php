@@ -3,6 +3,8 @@
 namespace InterviewBundle\Controller;
 
 use InterviewBundle\Document\Bio;
+use InterviewBundle\Services\BioServices;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +15,17 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller {
+  
+  private $serializer;
+		  
+  function __construct() {
+	
+	$normalizers = array(new ObjectNormalizer());
+	$encoders = array(new JsonEncoder());
+
+	$this->serializer = new Serializer($normalizers, $encoders);
+	
+  }
 
   /**
    * @Route("/bios")
@@ -29,27 +42,40 @@ class DefaultController extends Controller {
 //
 //	  $dm = $this->get('doctrine_mongodb')->getManager();
 
-	$bioRepo = $this->get('doctrine_mongodb')
-			->getRepository('InterviewBundle:Bio')
-	;
+	$bioRepo = $this->get('doctrine_mongodb')->getRepository('InterviewBundle:Bio');
 
 //	$bios = $bioRepo->findByFirstName('John');
-//	$bios = $bioRepo->findByDeadBefore(1999);
-	$bios = $bioRepo->findByContribution('Ruby');
+	$bios = $bioRepo->findByDeadBefore(1999);
+//	$bios = $bioRepo->findByContribution('Ruby');
 //        ->find("51df07b094c6acd67e492f41");
 
-	$encoders = array(new JsonEncoder());
-
-	$normalizers = array(new ObjectNormalizer());
-
-	$serializer = new Serializer($normalizers, $encoders);
-
-	$json = $serializer->serialize($bios, 'json');
+	$json = $this->serializer->serialize($bios, 'json');
 	
-	$response = new Response($serializer->serialize($bios, 'json'));
+	$response = new Response($json);	
 	$response->headers->set('Content-Type', 'application/json');
 
 	return $response;
   }
+  
+  /**
+   * @Route("/awards")
+   */
+  public function awardsAction() {
+	
 
+//	$service = new BioServices();
+	
+	$bioRepo = $this->get('interview_bundle.bios_service');
+	
+	$bios = $bioRepo->getAllAwards();
+	
+//	$json = $this->serializer->serialize($bios, 'json');
+	
+	$json = json_encode($bios, JSON_PRETTY_PRINT);
+	$response = new Response($json);
+	$response->headers->set('Content-Type', 'application/json');
+
+	return $response;
+	
+  }
 }
