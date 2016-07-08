@@ -46,3 +46,7 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+            
+#test:            
+#interviewbundle:
+#    ping: pong
